@@ -21,6 +21,8 @@ class RecipeManager {
             for (Recipe recipe : recipes) {
                 writer.write(recipe.getName() + "\n");
                 writer.write(String.join(",", recipe.getIngredients()) + "\n");
+                writer.write(Integer.toString(recipe.getCalories()) + "\n");
+                writer.write(String.join(",", recipe.getMakeToDish()) + "\n");
             }
             System.out.println("Recipes exported successfully.");
         } catch (IOException e) {
@@ -37,7 +39,11 @@ class RecipeManager {
                 String ingredientsLine = reader.readLine();
                 String[] ingredientsArray = ingredientsLine.split(",");
                 List<String> ingredients = List.of(ingredientsArray);
-                Recipe recipe = new Recipe(name, ingredients);
+                int calories = Integer.parseInt(reader.readLine());
+                String makeToDishLine = reader.readLine();
+                String[] makeToDishArray = makeToDishLine.split(",");
+                List<String> makeToDish = List.of(makeToDishArray);
+                Recipe recipe = new Recipe(name, ingredients, calories, makeToDish);
                 recipes.add(recipe);
             }
             System.out.println("Recipes imported successfully.");
@@ -46,5 +52,3 @@ class RecipeManager {
         }
     }
 }
-
-
